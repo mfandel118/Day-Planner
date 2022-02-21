@@ -18,20 +18,21 @@ var timeBLock = $(".time-block");
 var hour = $(".hour");
 var scheduleText = $("textarea");
 var saveButtons = $(".saveBtn");
+// console.log(saveButtons);
 
 // Display current day at top of page
 today.text("Current Workday: " + moment().format("dddd, MMMM Do YYYY"));
 
 function timeBlockColors () {
     var currentHour = moment().hour();
-    // console.log(currentHour);
-    var scheduleTextHour = scheduleText.attr("name");
-    // console.log(scheduleTextHour);
-    var hoursIndex = []; // HOW DO I PLACE EACH TEXTAREA NAME INTO ARRAY? OR DO I EVEN NEED TO?
-    
-    for (var i=0; i<=10; i++) {
-        // var scheduleTextHour = scheduleText.attr("name");
-        
+    console.log(currentHour);
+    // console.log(typeof(currentHour));
+
+    for (var i=0; i<scheduleText.length; i++) {
+        var scheduleTextHour = parseInt(scheduleText[i].name)
+        console.log(scheduleTextHour);
+        // console.log(typeof(scheduleTextHour));
+
         if (scheduleTextHour == currentHour) {
             hour.addClass("present");
             scheduleText.addClass("present");
@@ -43,37 +44,47 @@ function timeBlockColors () {
             scheduleText.addClass("future");
         };
     };
-    
-    
 };
 // Call function to set schedule hour colors
 timeBlockColors();
 
-// Add event listener to save user inputted data to localStorage
-saveButtons.on("click",saveData);
-function saveData() {
-    var userInput = scheduleText.val();
-    var hourKey = hour.val();  // WHY DOES HOUR NOT SHOW UP FOR KEY IN LOCALSTORAGE?
+saveButtons.on("click", saveData);
 
+function saveData(event) {
+    var hourKey = event.target.parentNode.children[0].textContent;
+    console.log(hourKey);
+    var userInput = event.target.parentNode.children[1].value;
     localStorage.setItem(hourKey, JSON.stringify(userInput));
 };
+
+
+
+// Add event listener to save user inputted data to localStorage
+// saveButtons.on("click",saveData);  // WHY DOES ONLY FIRST SAVE BUTTON WORK?
+// function saveData() {
+//     
+//     var hourKey = hour.text();  // WHY DOES HOUR NOT SHOW UP FOR KEY IN LOCALSTORAGE?
+
+//     
+// };
+
 
 // Function to keep inputted data on screen when user refreshes page
 function displayUserInput() {
     // Pull data from localStorage and display on page
     var savedUserInput = [
-        localStorage.getItem(JSON.parse("8AM")),
-        localStorage.getItem(JSON.parse("8AM")),
-        localStorage.getItem(JSON.parse("9AM")),
-        localStorage.getItem(JSON.parse("10AM")),
-        localStorage.getItem(JSON.parse("11AM")),
-        localStorage.getItem(JSON.parse("12PM")),
-        localStorage.getItem(JSON.parse("1PM")),
-        localStorage.getItem(JSON.parse("2PM")),
-        localStorage.getItem(JSON.parse("3PM")),
-        localStorage.getItem(JSON.parse("4PM")),
-        localStorage.getItem(JSON.parse("5PM")),
+        localStorage.getItem("8AM"),
+        localStorage.getItem("9AM"),
+        localStorage.getItem("10AM"),
+        localStorage.getItem("11AM"),
+        localStorage.getItem("12PM"),
+        localStorage.getItem("1PM"),
+        localStorage.getItem("2PM"),
+        localStorage.getItem("3PM"),
+        localStorage.getItem("4PM"),
+        localStorage.getItem("5PM"),
     ];
+    console.log(savedUserInput);
 
     for (var i=0; i<savedUserInput.length; i++) {
        scheduleText.text(savedUserInput[i])
