@@ -6,7 +6,7 @@
 
 // Timeblocks have text area where user can input schedule details ✅
 
-// When save buttons are clicked, schedule details are saved to localStorage
+// When save buttons are clicked, schedule details are saved to localStorage ✅
 
 // When user refreshes page, the text in the text areas is still displayed
 
