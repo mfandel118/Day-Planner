@@ -20,3 +20,7 @@ https://mfandel118.github.io/Day-Planner-Homework5/
 ## Link to GitHub Repo
 
 https://github.com/mfandel118/Day-Planner-Homework5
+
+## Screenshot
+
+<img src="./assets/images/day-planner.png">
